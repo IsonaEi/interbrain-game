@@ -1,0 +1,869 @@
+<meta charset="utf-8">
+<title>雙人圍獵</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>
+/*FONT-BEGIN*/@font-face{font-family:'Cubic11';src:url(data:font/woff2;base64,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) format('woff2');font-display:block}/*FONT-END*/
+:root{--bg:#2a2230;--ink:#3f2631;--panel:#fff8e8;--human:#2c5d87;--ai:#b4630e;--accent:#2c5d87;
+  --font:"Cubic11","PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);display:flex;align-items:center;justify-content:center;
+  overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+#wrap{position:relative}
+canvas{display:block;box-sizing:content-box;image-rendering:pixelated;border:3px solid var(--ink);border-radius:6px;touch-action:none}
+.card button{font:inherit;font-size:22px;padding:5px 12px;border-radius:6px;border:3px solid var(--ink);
+  background:var(--panel);color:var(--ink);cursor:pointer;box-shadow:0 3px 0 var(--ink)}
+.card button:active{transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
+.card button.on{background:var(--ink);color:var(--panel)}
+button:focus-visible{outline:3px solid #ffe08a;outline-offset:2px}
+.overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(42,34,48,.55);border-radius:6px}
+.overlay[hidden]{display:none}
+.card{touch-action:manipulation;background:var(--panel);border:3px solid var(--ink);border-radius:8px;padding:18px 24px;max-width:min(560px,92%);max-height:92%;overflow:auto;box-shadow:0 5px 0 var(--ink)}
+.card h2{margin:0 0 8px;font-size:33px;font-weight:400}
+.card p{margin:6px 0;font-size:22px;line-height:1.5}
+.card .row{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px;align-items:center}
+.card .lab{font-size:16px;min-width:64px}
+.keys{font-size:22px!important;opacity:.8}
+@media (max-height:520px){.card h2{font-size:22px}.card p,.keys{font-size:16px!important}.card button{font-size:16px}}
+b.h{color:var(--human)} b.a{color:var(--ai)}
+#rotate{position:fixed;inset:0;display:none;flex-direction:column;gap:16px;align-items:center;justify-content:center;background:var(--bg);color:var(--panel);
+  font-size:22px;line-height:1.5;text-align:center;padding:24px;z-index:9}
+#rotate div{max-width:100%;overflow-wrap:anywhere}
+#rotate button{font:inherit;font-size:22px;padding:6px 14px;border-radius:6px;border:3px solid var(--panel);background:transparent;color:var(--panel)}
+@media (orientation:portrait) and (pointer:coarse) and (max-width:600px){body:not(.portrait-ok) #rotate{display:flex}}
+</style>
+
+<div id="rotate"><div>請把手機轉成橫向來玩 ↻<br>轉了沒反應的話，<br>請關閉「直向鎖定」</div><button id="portraitOk">仍要直向玩</button></div>
+<div id="wrap">
+  <canvas id="cv" width="960" height="640"></canvas>
+  <div class="overlay" id="startOv">
+    <div class="card">
+      <h2>雙人圍獵</h2>
+      <p>你是<b class="h">戴帽的獵人</b>，AI 隊友是<b class="a">盔甲騎士</b>。</p>
+      <p>靠近鹿，鹿就會逃開。一個人趕不進柵欄，要兩個人從兩側夾住牠，才趕得進去。越快抓到分數越高。</p>
+      <p class="keys">電腦：方向鍵或 WASD 移動、M 選單、空白鍵暫停<br>手機：按住畫面任一處拖動來移動</p>
+      <div class="row"><button id="startBtn" class="on" autofocus>開始</button></div>
+      <p class="keys">美術素材：Kenney Tiny 系列（CC0）</p>
+    </div>
+  </div>
+  <div class="overlay" id="menuOv" hidden>
+    <div class="card">
+      <h2>選單</h2>
+      <div class="row"><span class="lab">子規則</span>
+        <button data-mode="base">基底</button><button data-mode="r1">R1 視野開關</button><button data-mode="r2">R2 兔與鹿</button><button data-mode="r3">R3 兩個柵欄</button></div>
+      <div class="row" id="visRow"><span class="lab">視野</span>
+        <button data-vis="see">看得到隊友</button><button data-vis="blind">看不到隊友</button></div>
+      <div class="row"><button id="restartBtn">重來（分數歸零）</button><button id="closeBtn" class="on">繼續</button></div>
+      <p class="keys">切換子規則或視野會重新計分。「說明」會顯示 AI 目前在做什麼。</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// SIM-BEGIN
+// 模擬邏輯：不碰 DOM／canvas；test_sim.js 以 vm 抽出這段執行。機制與數字來自 proto-herd/core.js、run.js。
+const SIM = (() => {
+  const CONFIG = {
+    W: 960, H: 640, dt: 1 / 60, T: 40,
+    trapInset: 110, trapR: 50,          // 柵欄中心離兩面牆各 trapInset；每回合隨機一個角落
+    vH: 200, vBotMul: 1.3,            // 鹿最高速＝獵人 1.3 倍；靠太近就追不上
+    R: 120, thetaMin: 50, beta: 40,    // 側閃：遠離方向轉 40°；遠離分速 cos40°×鹿速 ≥ 獵人速，才保持得住距離
+    sideAhead: 90, sideWall: 30, sidePen: 2,
+    trapAvoidD: 70, wallD: 60, kw: 1.5, wanderMul: 0.3, speedGain: 2.16,   // 逃跑速度在 0.75R 處等於獵人速度
+    fleeFloor: 0.5,    // 一進驅趕圈就至少用這個比例的速度逃，圈的大小與逃跑時機對得上
+    sideHold: 0.6,     // 側閃選邊後至少維持的秒數（防抖）
+    botResp: 16,       // 鹿速度的反應率（1/s）；越小轉向越平滑
+    pinchMul: 0.8,     // 被夾住時鹿的速度上限（×獵人速度），兩人才跟得上、推得動
+    botMargin: 40,     // 鹿離牆最小距離，避免貼死在角落、獵人繞不到背後
+    grace: 1.0, hold: 1.0, thetaSep: 80, fillMax: 80, standR: 0.85, thetaF: 40,
+    orbitIn: 1.25, orbitCos: 0.6, orbitR: 1.3, orbitRot: 0.7,
+    blindSw: 1.5, startBotTrap: 3, startHunterBot: 1.5, startMargin: 60,
+    hunterMargin: 16,
+    aiOn: true,
+    r3: null,          // R3 開啟時為參數物件（見 R3DEF）；null＝單一 Trap（基底／R1）
+    r2: null,          // R2 開啟時為參數物件（見 R2DEF）；null＝沒有兔子
+  };
+  const R3DEF = {
+    layout: 'nshort',  // 兩 Trap 的角落組合：nshort（對角或同一長邊，排除同一短邊）／any（任兩角）／diag（對角）／long（同一長邊）／short（同一短邊）／adj（相鄰）
+    hiMul: 3, loMul: 1, info: null,   // info：'H' 人知／'A' AI 知／'N' 都不知；null＝每回合隨機各 1/3
+    seeR: 1.2, acq: 45, keep: 95, margin: 20, apprV: 0.3,  // 讀人：人在鹿 seeR·R 內；背側角度 < acq° 新判、< keep° 沿用；兩個都在時差 > margin°；靠近＝距離縮短速度 > apprV·vH
+    Edecay: 1.5, Emax: 2, decT: 1.5, folT: 0.6, otherLow: 0.3,   // 證據累積（s）：果斷＝E ≥ decT 且另一個 < otherLow；跟上＝E ≥ folT
+    hesT: 2.0,         // 人猶豫（沒靠近鹿、也沒推任何 Trap）累計 hesT 秒 → 試探
+    rs: 1.5, wideA: 60, arcStep: 0.5, alignA: 8, dashR: 0.55, dashT: 1.8, arcMax: 3.0, watchT: 1.5, sigMax: 2, insistT: 2.5,   // 示意；讓步＝示意完成後人連續推另一個 insistT 秒
+    probeT: 1.2, probeMax: 2, probeStopR: 1.5,   // 試探
+    waitR: 1.8,        // 等待站位半徑（×R）；離鹿 < 1.2R 時先沿徑向退開
+    swHold: 1.0,       // 行為切換後至少維持（s）
+  };
+  const R2DEF = {
+    rabR: 28, dwellT: 1.0, rabMul: 0.5,   // 抓兔＝獵人中心在兔 rabR 內連續停 dwellT 秒；得 ceil(剩餘秒數 × rabMul)，只給抓到的人
+    // 兔子位置（×R，牆為 px）：離 Trap、鹿起點、兩個獵人起點、另一隻兔子的最小距離
+    rabTrap: 2.5, rabBot: 2.5, rabHunt: 2.5, rabRab: 3.0, rabWall: 60, rabTop: 145, rabBottom: 100,   // 上下避開 HUD、提示與說明列
+    // 讀人：人朝兔 j 走＝移動速度 > headV·vH、朝兔 j 的靠近速度 > cos(headA°)×速度、朝鹿的靠近速度 < apprB·vH（繞去鹿背後的人會一直靠近鹿），或人在兔 nearR·R 內；人在鹿 farB·R 內不算
+    headV: 0.5, headA: 40, apprB: 0.3, nearR: 0, farB: 1.6,
+    Edecay: 1.5, Emax: 2, trigE: 0.4, decE: 1.0, commitR: 2.5, onT: 0.35,   // commitR：判定「人仍去抓兔」還要人離那隻兔 < commitR·R（亂逛的人不會被當成去抓兔）   // 證據（s）：≥ trigE 觸發示意；示意完成後 ≥ decE＝人仍去抓兔
+    rs: 1.5, wideA: 0, arcStep: 0.5, alignA: 8, dashR: 0.55, dashT: 0.8, arcMax: 3.0, watchT: 0.3, sigMax: 1, abortOn: true,   // 示意（同 R3 繞弧＋衝刺，但不先外擺、衝刺 0.8 s、判斷窗 0.3 s：人走到兔再停 1 s 中位約 2.9 s），每回合一次；abortOn：人已站上兔計時且不在衝刺中 → 直接搶另一隻
+    lateT: 4,          // 剩餘 ≤ lateT 秒而鹿 lateGrace 秒內沒被夾住 → AI 改抓兔（含停 1 s；AI 平均分在 lateT 4–10 s 持平、12 s 下降；取持平段最小值，人損失最少）
+    lateGrace: 1.0,
+    avoid: 16,         // AI 不抓兔時與兔子保持 rabR + avoid 的距離（繞開）
+    swHold: 1.0,       // 行為切換後至少維持（s）
+  };
+  const D2R = Math.PI / 180;
+  const add = (a, b) => [a[0] + b[0], a[1] + b[1]], sub = (a, b) => [a[0] - b[0], a[1] - b[1]], mul = (a, k) => [a[0] * k, a[1] * k];
+  const len = a => Math.hypot(a[0], a[1]), unit = a => { const l = len(a) || 1e-9; return [a[0] / l, a[1] / l]; };
+  const dot = (a, b) => a[0] * b[0] + a[1] * b[1];
+  const rot = (a, t) => [a[0] * Math.cos(t) - a[1] * Math.sin(t), a[0] * Math.sin(t) + a[1] * Math.cos(t)];
+  const ang = (a, b) => Math.atan2(a[0] * b[1] - a[1] * b[0], dot(a, b));
+  const clampLen = (v, m) => { const l = len(v); return l > m ? mul(v, m / l) : v; };
+  function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+
+  function newRound(opts) {
+    const C = Object.assign({}, CONFIG, opts.config || {});
+    const rnd = mulberry32(opts.seed >>> 0);
+    const I = C.trapInset, corners = [[I, I], [C.W - I, I], [I, C.H - I], [C.W - I, C.H - I]];
+    if (C.r3) {
+      C.r3 = Object.assign({}, R3DEF, C.r3);
+      const pairs = { any: [[0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3]], diag: [[0, 3], [1, 2]], long: [[0, 1], [2, 3]], short: [[0, 2], [1, 3]], adj: [[0, 1], [2, 3], [0, 2], [1, 3]], nshort: [[0, 3], [1, 2], [0, 1], [2, 3]] }[C.r3.layout];
+      const pr = pairs[Math.floor(rnd() * pairs.length)], hi = rnd() < .5 ? 0 : 1;
+      C.traps = pr.map((ci, i) => ({ p: corners[ci], mul: i === hi ? C.r3.hiMul : C.r3.loMul, hi: i === hi }));
+      C.hi = hi;
+      C.info = C.r3.info || ['H', 'A', 'N'][Math.floor(rnd() * 3)];
+      C.trap = C.traps[C.r3.ref === 'lo' ? 1 - hi : hi].p;   // 單人腳本推的目標（預設高分）
+    } else {
+      C.trap = opts.trap || (opts.config && opts.config.trap) || corners[Math.floor(rnd() * 4)];
+      C.traps = [{ p: C.trap, mul: 1, hi: true }]; C.hi = 0;
+    }
+    const inside = (p, m = 0) => [Math.min(C.W - m, Math.max(m, p[0])), Math.min(C.H - m, Math.max(m, p[1]))];
+    let bot, hum, ai;
+    const M = C.startMargin;
+    do { bot = [M + rnd() * (C.W - 2 * M), M + rnd() * (C.H - 2 * M)]; } while (C.traps.some(tr => len(sub(bot, tr.p)) < C.startBotTrap * C.R));
+    do { hum = [M + rnd() * (C.W - 2 * M), M + rnd() * (C.H - 2 * M)]; } while (len(sub(hum, bot)) < C.startHunterBot * C.R);
+    do { ai = [M + rnd() * (C.W - 2 * M), M + rnd() * (C.H - 2 * M)]; } while (len(sub(ai, bot)) < C.startHunterBot * C.R);
+    let rabbits = null;
+    if (C.r2) { C.r2 = Object.assign({}, R2DEF, C.r2); rabbits = r2Place(C, rnd, bot, hum, ai); }
+    return {
+      C, rnd, inside, t: 0, phase: 'play', result: null,
+      blind: !!opts.blind,
+      bot, botPrev: bot.slice(), hum, ai, rabbits, humPrev: hum.slice(), aiPrev: ai.slice(),
+      botSt: { wt: 0, wd: 0, side: 0, sideT: 0, v: [0, 0], pinched: false, threat: false },
+      aiSt: { mode: C.r3 ? (C.info === 'A' ? 'sig' : 'wait') : opts.blind ? 'blind' : 'lead', r3: C.r3 ? r3Init(C) : null, r2: C.r2 ? r2Init(C) : null, hold: 0, side: rnd() < .5 ? 1 : -1, lastIn: -9, pushing: false, target: ai.slice(), sw: 0, bside: 0 },
+    };
+  }
+
+  const stand = (C, bot, u, phi, r) => add(bot, mul(rot(mul(u, -1), phi), (r || C.standR) * C.R));
+
+  // AI 走向目標點；直線會從錯誤方向推到鹿時，沿外圈繞過去
+  function goTo(S, p, tgt) {
+    const C = S.C, bot = S.bot;
+    const rel = sub(p, bot), rt = sub(tgt, bot);
+    if (len(rel) < C.orbitIn * C.R && dot(unit(rel), unit(rt)) < C.orbitCos) {
+      const sd = Math.sign(ang(rel, rt)) || 1;
+      tgt = add(bot, mul(rot(unit(rel), sd * C.orbitRot), C.orbitR * C.R));
+    }
+    return S.inside(add(p, clampLen(sub(tgt, p), C.vH * C.dt)), C.hunterMargin);
+  }
+
+  function aiStep(S) {
+    const C = S.C, A = S.aiSt, bot = S.bot, hum = S.hum;
+    const u = unit(sub(C.trap, bot));
+    let at;
+    if (S.blind) {
+      // R1 看不到：不讀人，隨機換站位
+      A.sw -= C.dt;
+      if (A.sw <= 0) { A.bside = Math.floor(S.rnd() * 3) - 1; A.sw = C.blindSw * (0.7 + 0.6 * S.rnd()); }
+      A.mode = 'blind'; A.pushing = false;
+      at = stand(C, bot, u, A.bside * C.thetaF * D2R);
+    } else {
+      if (len(sub(hum, bot)) < C.R) A.lastIn = S.t;
+      A.pushing = (S.t - A.lastIn) <= C.grace;
+      const want = A.pushing ? 'fill' : 'lead';
+      A.hold -= C.dt;
+      if (want !== A.mode && A.hold <= 0) { A.mode = want; A.hold = C.hold; }
+      if (A.mode === 'blind') A.mode = want;
+      const phH = ang(mul(u, -1), unit(sub(hum, bot)));
+      if (A.mode === 'fill') {
+        let s = -Math.sign(phH); if (Math.abs(phH) < 5 * D2R) s = A.side; A.side = s;
+        const m = Math.min(C.fillMax * D2R, Math.max(Math.abs(phH), C.thetaSep * D2R - Math.abs(phH)));
+        at = stand(C, bot, u, s * m);
+      } else {
+        if (Math.abs(phH) > 5 * D2R) A.side = -Math.sign(phH);
+        at = stand(C, bot, u, A.side * C.thetaF * D2R);
+      }
+    }
+    A.target = at;
+    S.ai = goTo(S, S.ai, at);
+  }
+
+  // ---------- R3 AI：兩個 Trap ----------
+  const R3LABEL = { sig: '示意', wait: '等待', probe: '試探', fill: '補位', lead: '帶路', yield: '讓步' };
+  function r3Init(C) {
+    const know = C.info === 'A';
+    return { know, K: know ? C.hi : -1, ph: know ? 'start' : '', mt: 0, pt: 0, hold: 0, E: [0, 0], hT: -1, hes: 0, dhPrev: null, nSig: know ? 1 : 0, sigDone: 0, ins: 0, nProbe: 0,
+      wside: 0, inR: false, rec: { sw: 0, modes: [], sigDisp: [], waitIn: 0, waitN: 0, yielded: false, idleBoth: 0, maxIdleBoth: 0 }, sig0: null };
+  }
+  const clamp1 = x => Math.max(-1, Math.min(1, x));
+  // 感知：人位於哪個 Trap 的背側（鹿為中心，與「鹿→Trap」反方向夾角 < cone）；兩個都是時角度差 > margin 才換判，否則沿用
+  function r3Perceive(S) {
+    const C = S.C, P = C.r3, A = S.aiSt, Z = A.r3, bot = S.bot, hum = S.hum;
+    const dh = len(sub(hum, bot));
+    if (dh < C.R) A.lastIn = S.t;
+    A.pushing = (S.t - A.lastIn) <= C.grace;
+    const bh = unit(sub(hum, bot));
+    const an = C.traps.map(tr => Math.acos(clamp1(-dot(bh, unit(sub(tr.p, bot))))));
+    // 背側判定帶遲滯：新判一個 Trap 要在 acq° 內（兩個都在時要差 margin°），已判的只要還在 keep° 內就沿用（夾擊時人站斜後方 ≤ 80°）
+    let k = -1;
+    if (dh < P.seeR * C.R) {
+      const j = Z.hT, bI = an[0] <= an[1] ? 0 : 1;
+      if (j >= 0 && an[j] < P.keep * D2R && !(an[1 - j] < P.acq * D2R && an[1 - j] + P.margin * D2R < an[j])) k = j;
+      else if (an[bI] < P.acq * D2R && an[1 - bI] - an[bI] > P.margin * D2R) k = bI;
+    }
+    // 猶豫累計：人沒在靠近鹿、也沒被判成在推某個 Trap 的時間
+    const appr = Z.dhPrev != null && (Z.dhPrev - dh) / C.dt > P.apprV * C.vH;
+    Z.dhPrev = dh;
+    // 猶豫＝沒推任何 Trap、沒靠近鹿、而且人幾乎站著不動（繞到鹿背後的移動不算猶豫）
+    const hv = len(sub(S.hum, S.humPrev)) / C.dt;
+    if (k < 0 && !appr && hv < P.apprV * C.vH) Z.hes += C.dt;
+    Z.hT = k;
+    for (let i = 0; i < 2; i++) Z.E[i] = k === i ? Math.min(P.Emax, Z.E[i] + C.dt) : Math.max(0, Z.E[i] - P.Edecay * C.dt);
+  }
+  const r3Dec = (Z, P, k) => Z.E[k] >= P.decT && Z.E[1 - k] < P.otherLow;   // 人果斷推 k
+  const r3Fol = (Z, P, k) => Z.E[k] >= P.folT;                               // 人跟上 k
+
+  function r3Set(S, mode, K) {
+    const A = S.aiSt, Z = A.r3;
+    if (mode !== A.mode) { Z.rec.sw++; Z.rec.modes.push([+S.t.toFixed(2), mode, K]); Z.hold = S.C.r3.swHold; }
+    A.mode = mode; Z.K = K; Z.mt = 0; Z.pt = 0; Z.inR = false;
+    Z.ph = mode === 'sig' ? 'start' : mode === 'probe' ? 'push' : '';
+  }
+
+  // 投入中（補位／帶路／讓步）的站位：人在推 → 補位幾何；人沒在推 → 帶路幾何（同基底），軸都對 Trap K
+  function r3Engaged(S, K) {
+    const C = S.C, A = S.aiSt, bot = S.bot, hum = S.hum;
+    const u = unit(sub(C.traps[K].p, bot));
+    const phH = ang(mul(u, -1), unit(sub(hum, bot)));
+    if (A.pushing) {
+      let s = -Math.sign(phH); if (Math.abs(phH) < 5 * D2R) s = A.side; A.side = s;
+      const m = Math.min(C.fillMax * D2R, Math.max(Math.abs(phH), C.thetaSep * D2R - Math.abs(phH)));
+      return stand(C, bot, u, s * m);
+    }
+    if (Math.abs(phH) > 5 * D2R) A.side = -Math.sign(phH);
+    return stand(C, bot, u, A.side * C.thetaF * D2R);
+  }
+
+  // 示意：從鹿背側繞大弧、對成一直線再衝刺推（R3、R2 共用）；Z＝S.aiSt.r2 或 .r3，P＝對應參數，engaged(k)＝判斷窗的站位
+  function sigStep(S, P, k, engaged) {
+    const C = S.C, Z = S.aiSt.r2 || S.aiSt.r3, bot = S.bot;
+    const rel = sub(S.ai, bot), dA = len(rel);
+    const u = unit(sub(C.traps[k].p, bot)), b = mul(u, -1), psi = ang(b, rel);
+    let at, direct = false;
+    Z.pt += C.dt;
+    if (Z.ph === 'start') { Z.ph = Math.abs(psi) < P.wideA * D2R ? 'wide' : 'arc'; Z.wsgn = Math.sign(psi) || 1; Z.pt = 0; Z.sT = 0; }
+    // 繞弧超時（例如鹿背後是牆、弧點在場外）：這次示意算完成，直接投入推，避免卡在牆邊
+    if (Z.ph === 'wide' || Z.ph === 'arc') { Z.sT += C.dt; if (Z.sT > P.arcMax) { Z.ph = 'watch'; Z.pt = 0; Z.sigDone++; } }
+    if (Z.ph === 'wide') {
+      at = add(bot, mul(rot(b, Z.wsgn * P.wideA * D2R), P.rs * C.R));
+      if (len(sub(at, S.ai)) < 25) { Z.ph = 'arc'; Z.pt = 0; }
+    }
+    if (Z.ph === 'arc') {
+      const s = Math.sign(psi) || 1, np = psi - s * Math.min(Math.abs(psi), P.arcStep);
+      at = add(bot, mul(rot(b, np), P.rs * C.R));
+      if (Math.abs(psi) < P.alignA * D2R && Math.abs(dA - P.rs * C.R) < 30) { Z.ph = 'dash'; Z.pt = 0; Z.sig0 = { bot: bot.slice(), u }; }
+    }
+    if (Z.ph === 'dash') {
+      // 衝刺：沿 u 直線推，不經過繞行規則
+      at = add(bot, mul(b, P.dashR * C.R)); direct = true;
+      if (Z.pt >= P.dashT) { Z.ph = 'watch'; Z.pt = 0; Z.sigDone++; }
+    }
+    if (Z.ph === 'watch') {
+      at = engaged(k);
+      if (Z.pt >= P.watchT - C.dt && Z.sig0) { Z.rec.sigDisp.push(dot(sub(bot, Z.sig0.bot), Z.sig0.u)); Z.sig0 = null; }
+    }
+    return [at, direct];
+  }
+
+  function aiStepR3(S) {
+    const C = S.C, P = C.r3, A = S.aiSt, Z = A.r3, bot = S.bot, hum = S.hum;
+    r3Perceive(S);
+    Z.mt += C.dt; Z.hold -= C.dt;
+    const K = Z.K, o = 1 - K, can = Z.hold <= 0;
+    // ---- 行為切換 ----
+    if (Z.know) {
+      const H = C.hi;
+      // 堅持＝示意完成後，人「連續」推另一個 Trap 的秒數；中斷或已讓步就歸零
+      if (Z.hT === 1 - H && Z.sigDone >= 1 && A.mode !== 'yield') Z.ins += C.dt; else Z.ins = 0;
+      const insist = Z.ins >= P.insistT && r3Dec(Z, P, 1 - H);
+      if (A.mode === 'sig' && can) {
+        if (r3Fol(Z, P, H)) r3Set(S, 'lead', H);
+        else if (insist) { r3Set(S, 'yield', 1 - H); Z.rec.yielded = true; }
+        else if (Z.ph === 'watch' && Z.pt >= P.watchT) {
+          if (Z.nSig >= P.sigMax) r3Set(S, 'lead', H);
+          else { Z.ph = 'start'; Z.pt = 0; Z.nSig++; }
+        }
+      } else if (A.mode === 'lead' && can) {
+        if (Z.nSig < P.sigMax && r3Dec(Z, P, 1 - H)) { r3Set(S, 'sig', H); Z.nSig++; }
+        else if (insist) { r3Set(S, 'yield', 1 - H); Z.rec.yielded = true; }
+      } else if (A.mode === 'yield' && can) {
+        if (r3Dec(Z, P, H)) r3Set(S, 'lead', H);
+      }
+    } else {
+      if (A.mode === 'wait' && can) {
+        if (r3Dec(Z, P, 0)) r3Set(S, 'fill', 0);
+        else if (r3Dec(Z, P, 1)) r3Set(S, 'fill', 1);
+        else if (Z.hes >= P.hesT) {
+          const dT = C.traps.map(tr => len(sub(tr.p, bot)));
+          const pk = Z.E[0] !== Z.E[1] ? (Z.E[0] > Z.E[1] ? 0 : 1) : (dT[0] < dT[1] ? 0 : 1);
+          r3Set(S, 'probe', pk);
+        }
+      } else if (A.mode === 'probe' && can) {
+        if (r3Fol(Z, P, K)) r3Set(S, 'lead', K);
+        else if (r3Dec(Z, P, o)) { r3Set(S, 'yield', o); Z.rec.yielded = true; }
+        else if (Z.ph === 'stop' && Z.pt >= P.watchT) {
+          Z.nProbe++;
+          if (Z.nProbe >= P.probeMax) r3Set(S, 'lead', K); else { Z.ph = 'push'; Z.pt = 0; Z.inR = false; }
+        }
+      } else if ((A.mode === 'fill' || A.mode === 'lead' || A.mode === 'yield') && can) {
+        if (r3Dec(Z, P, o)) { if (A.mode === 'lead') { r3Set(S, 'yield', o); Z.rec.yielded = true; } else { Z.K = o; Z.hold = P.swHold; Z.rec.sw++; } }
+      }
+    }
+    // ---- 目標點 ----
+    const k = Z.K;
+    let at, direct = false;
+    const rel = sub(S.ai, bot), dA = len(rel);
+    if (A.mode === 'wait') {
+      // 站在人—鹿連線的垂直方向 waitR·R，選離 AI 目前方位近的一側；貼牆被夾回時換邊或往其他角度找，確保在 R 外
+      const hb = len(sub(hum, bot)) > 1 ? unit(sub(hum, bot)) : [1, 0];
+      if (!Z.wside) Z.wside = ang(hb, rel) >= 0 ? 1 : -1;
+      const cands = [90, 120, 60, 150, 30, 180].flatMap(a => [Z.wside * a, -Z.wside * a]);
+      at = null;
+      for (const a of cands) { const p = S.inside(add(bot, mul(rot(hb, a * D2R), P.waitR * C.R)), C.hunterMargin); if (len(sub(p, bot)) >= 1.25 * C.R) { at = p; break; } }
+      if (!at) at = S.inside(add(bot, mul(dA > 1 ? unit(rel) : [1, 0], P.waitR * C.R)), C.hunterMargin);
+      // 已經離鹿不到 1.2R：先沿徑向退開
+      if (dA < 1.2 * C.R) { at = S.inside(add(bot, mul(dA > 1 ? unit(rel) : [1, 0], P.waitR * C.R)), C.hunterMargin); direct = true; }
+      Z.rec.waitN++; if (dA < C.R) Z.rec.waitIn++;
+    } else if (A.mode === 'sig') {
+      [at, direct] = sigStep(S, P, k, K_ => r3Engaged(S, K_));
+    } else if (A.mode === 'probe') {
+      const u = unit(sub(C.traps[k].p, bot));
+      Z.pt += C.dt;
+      if (Z.ph === 'push') {
+        at = stand(C, bot, u, 0);
+        if (dA < C.R) Z.inR = true;
+        if (Z.inR) Z.mt2 = (Z.mt2 || 0) + C.dt; else Z.mt2 = 0;
+        if (Z.mt2 >= P.probeT || Z.pt > P.probeT + 3) { Z.ph = 'stop'; Z.pt = 0; Z.mt2 = 0; }
+      }
+      if (Z.ph === 'stop') at = add(bot, mul(u, -P.probeStopR * C.R));
+    } else at = r3Engaged(S, k);
+    // 雙方都不推的連續時間（卡死偵測）
+    const aiPush = dA < C.R;
+    if (A.mode === 'wait' && len(sub(hum, bot)) >= C.R) { Z.rec.wI = (Z.rec.wI || 0) + C.dt; Z.rec.wIMax = Math.max(Z.rec.wIMax || 0, Z.rec.wI); } else Z.rec.wI = 0;
+    if (!aiPush && len(sub(hum, bot)) >= C.R) { Z.rec.idleBoth += C.dt; Z.rec.maxIdleBoth = Math.max(Z.rec.maxIdleBoth, Z.rec.idleBoth); } else Z.rec.idleBoth = 0;
+    A.target = at;
+    S.ai = direct ? S.inside(add(S.ai, clampLen(sub(at, S.ai), C.vH * C.dt)), C.hunterMargin) : goTo(S, S.ai, at);
+  }
+
+  // ---------- R2：兔與鹿 ----------
+  // 兔子位置：每隻離 Trap、鹿起點、兩個獵人起點、另一隻兔子都夠遠；抽不到就把距離放寬 10% 再抽
+  function r2Place(C, rnd, bot, hum, ai) {
+    const P = C.r2, R = C.R, m = P.rabWall;
+    for (let f = 1; ; f *= 0.9) {
+      const out = [];
+      for (let n = 0; n < 400 && out.length < 2; n++) {
+        const p = [m + rnd() * (C.W - 2 * m), P.rabTop + rnd() * (C.H - P.rabTop - P.rabBottom)];
+        if (len(sub(p, C.trap)) >= P.rabTrap * R * f && len(sub(p, bot)) >= P.rabBot * R * f && len(sub(p, hum)) >= P.rabHunt * R * f && len(sub(p, ai)) >= P.rabHunt * R * f
+          && out.every(q => len(sub(p, q)) >= P.rabRab * R * f)) out.push(p);
+      }
+      if (out.length === 2) { out.forEach(p => { p.hold = { hum: 0, ai: 0 }; }); return out; }
+    }
+  }
+  const R2LABEL = { lead: '帶路', fill: '補位', sig: '示意', rab: '抓兔' };
+  function r2Init(C) {
+    return { ph: '', pt: 0, hold: 0, E: [0, 0], hR: -1, nSig: 0, sigDone: 0, rab: -1, why: '', pinT: -9, sig0: null,
+      rec: { sw: 0, modes: [], sigDisp: [], sigT: -1, dashT: -1, sigEnd: -1, rabT: -1, rabWhy: '', minRabD: 1e9, idleBoth: 0, maxIdleBoth: 0 } };
+  }
+  // 說明列一行：AI 行為｜對人的判斷｜打算抓什麼
+  function r2Say(S) {
+    const A = S.aiSt, Z = A.r2, P = S.C.r2;
+    const you = S.rabbits.some(r => r.hold.hum >= P.onT) ? '你在抓兔' : A.pushing ? '你在推鹿' : Math.max(...Z.E) >= P.trigE ? '你往兔子走' : '你沒在推鹿';
+    const plan = A.mode !== 'rab' ? '要抓鹿' : Z.why === 'late' ? '時間不夠，改抓兔' : '判斷鹿沒希望，改抓兔';
+    return `AI${R2LABEL[A.mode] || A.mode}｜${you}｜AI${plan}`;
+  }
+  // 讀人：推鹿（同基底 1 s 寬限）；朝哪隻兔子走（方向＋距離），累積成證據 E
+  function r2Perceive(S) {
+    const C = S.C, P = C.r2, A = S.aiSt, Z = A.r2, bot = S.bot, hum = S.hum;
+    const dh = len(sub(hum, bot));
+    if (dh < C.R) A.lastIn = S.t;
+    A.pushing = (S.t - A.lastIn) <= C.grace;
+    if (S.botSt.pinched) Z.pinT = S.t;
+    const hv = sub(hum, S.humPrev), sp = len(hv) / C.dt;
+    // 靠近速度：人朝某點每秒拉近的距離
+    const close = p => dot(hv, unit(sub(p, hum))) / C.dt;
+    let k = -1;
+    // 人在鹿 farB·R 內＝在鹿旁繞位，不讀成朝兔
+    if (dh >= P.farB * C.R) {
+      const cb = close(bot);
+      let best = 1e9;
+      S.rabbits.forEach((r, j) => {
+        const dr = len(sub(r, hum));
+        const head = sp > P.headV * C.vH && close(r) > Math.cos(P.headA * D2R) * sp && cb < P.apprB * C.vH;
+        if ((head || dr < P.nearR * C.R) && dr < best) { best = dr; k = j; }
+      });
+    }
+    // 人已站上兔子（計時中）＝最強的證據：直接判成朝那隻、證據拉滿
+    const on = S.rabbits.findIndex(r => r.hold.hum >= P.onT);   // 路過兔子最多停約 0.28 s，不算
+    if (on >= 0) k = on;
+    Z.hR = k;
+    for (let j = 0; j < 2; j++) Z.E[j] = k === j ? (on === j ? P.Emax : Math.min(P.Emax, Z.E[j] + C.dt)) : Math.max(0, Z.E[j] - P.Edecay * C.dt);
+  }
+  function r2Set(S, mode, rab, why) {
+    const A = S.aiSt, Z = A.r2;
+    if (mode !== A.mode) { Z.rec.sw++; Z.rec.modes.push([+S.t.toFixed(2), mode]); Z.hold = S.C.r2.swHold; }
+    if (mode === 'rab') { Z.rab = rab; Z.why = why; if (Z.rec.rabT < 0) { Z.rec.rabT = S.t; Z.rec.rabWhy = why; } }
+    A.mode = mode; Z.ph = mode === 'sig' ? 'start' : ''; Z.pt = 0;
+  }
+  // 不抓兔時的移動：朝兔子的分量改成沿兔子外緣滑，進入 rabR + avoid 就推回圈上
+  function r2Avoid(S, p0, p1) {
+    const C = S.C, P = C.r2, ra = P.rabR + P.avoid;
+    let v = sub(p1, p0);
+    for (const r of S.rabbits) {
+      const n = sub(p0, r);
+      if (len(n) < ra + 2 && dot(v, n) < 0) { const nn = unit(n), sp = len(v); v = sub(v, mul(nn, dot(v, nn))); v = len(v) > 1e-6 ? mul(unit(v), sp) : v; }
+    }
+    let p = add(p0, v);
+    for (const r of S.rabbits) { const n = sub(p, r), d = len(n); if (d < ra) p = add(r, mul(d > 1e-6 ? unit(n) : [1, 0], ra)); }
+    return S.inside(p, C.hunterMargin);
+  }
+
+  function aiStepR2(S) {
+    const nearHum = j => j >= 0 && len(sub(S.rabbits[j], S.hum)) < S.C.r2.commitR * S.C.R;
+    const C = S.C, P = C.r2, A = S.aiSt, Z = A.r2, bot = S.bot;
+    r2Perceive(S);
+    Z.hold -= C.dt;
+    const can = Z.hold <= 0, eMax = Math.max(...Z.E), hj = Z.E[0] >= Z.E[1] ? 0 : 1;
+    // 時間不夠：剩 lateT 秒而鹿 lateGrace 秒內沒被夾住 → 抓離自己近的兔子
+    const late = C.T - S.t <= P.lateT && S.t - Z.pinT > P.lateGrace;
+    const nearRab = () => len(sub(S.rabbits[0], S.ai)) <= len(sub(S.rabbits[1], S.ai)) ? 0 : 1;
+    if (A.mode !== 'rab' && late) r2Set(S, 'rab', nearRab(), 'late');
+    else if ((A.mode === 'lead' || A.mode === 'fill') && can) {
+      if (eMax >= P.trigE && Z.nSig < P.sigMax) { r2Set(S, 'sig'); Z.nSig++; Z.rec.sigT = S.t; }
+      else if (eMax >= P.decE && nearHum(hj) && Z.sigDone >= 1) r2Set(S, 'rab', 1 - hj, 'hum');
+      else if (A.mode === 'lead' && A.pushing) r2Set(S, 'fill');   // 補位後不再切回帶路：站位幾何隨人在不在推而變（同 R3）
+    } else if (A.mode === 'sig' && P.abortOn && S.rabbits.some(r => r.hold.hum > 0) && Z.ph !== 'dash') {
+      // 人已站上兔子（計時中）且衝刺未開始或已結束：示意算失敗，直接搶另一隻
+      const j = S.rabbits.findIndex(r => r.hold.hum > 0); r2Set(S, 'rab', 1 - j, 'hum');
+    } else if (A.mode === 'sig' && can) {
+      if (Z.ph === 'watch' && Z.pt >= P.watchT) {
+        if (eMax >= P.decE && nearHum(hj)) r2Set(S, 'rab', 1 - hj, 'hum'); else r2Set(S, A.pushing ? 'fill' : 'lead');
+      }
+    } else if (A.mode === 'rab' && can) {
+      // 人回頭推鹿（且時間還夠）→ 回去補位
+      if (Z.why === 'hum' && A.pushing && eMax < 0.1) r2Set(S, 'fill');
+    }
+    // ---- 目標點 ----
+    let at, direct = false;
+    if (A.mode === 'sig') {
+      [at, direct] = sigStep(S, P, 0, K_ => r3Engaged(S, K_));
+      if (Z.ph === 'dash' && Z.rec.dashT < 0) Z.rec.dashT = S.t;
+      if (Z.sigDone >= 1 && Z.rec.sigEnd < 0) Z.rec.sigEnd = S.t;
+    } else if (A.mode === 'rab') { at = S.rabbits[Z.rab]; direct = true; }
+    else at = r3Engaged(S, 0);
+    A.target = at;
+    const nx = direct ? S.inside(add(S.ai, clampLen(sub(at, S.ai), C.vH * C.dt)), C.hunterMargin) : goTo(S, S.ai, at);
+    S.ai = A.mode === 'rab' ? nx : r2Avoid(S, S.ai, nx);
+    if (A.mode !== 'rab') Z.rec.minRabD = Math.min(Z.rec.minRabD, ...S.rabbits.map(r => len(sub(S.ai, r))));
+    if (len(sub(S.ai, bot)) >= C.R && len(sub(S.hum, bot)) >= C.R && A.mode !== 'rab') { Z.rec.idleBoth += C.dt; Z.rec.maxIdleBoth = Math.max(Z.rec.maxIdleBoth, Z.rec.idleBoth); } else Z.rec.idleBoth = 0;
+  }
+  // 抓兔：獵人中心在兔 rabR 內連續停 dwellT 秒（離開就歸零）；人、AI 各自計時，先滿者抓到，同一步都滿＝both。進度在 S.rabbits[j].hold
+  function r2Touch(S) {
+    const C = S.C, P = C.r2, full = x => x >= P.dwellT - 1e-9;
+    let h = -1, a = -1;
+    S.rabbits.forEach((r, j) => {
+      r.hold.hum = len(sub(S.hum, r)) < P.rabR ? r.hold.hum + C.dt : 0;
+      r.hold.ai = C.aiOn && len(sub(S.ai, r)) < P.rabR ? r.hold.ai + C.dt : 0;
+      if (full(r.hold.hum) && h < 0) h = j;
+      if (full(r.hold.ai) && a < 0) a = j;
+    });
+    if (h < 0 && a < 0) return false;
+    const pts = Math.ceil((C.T - S.t) * P.rabMul);
+    S.phase = 'end';
+    S.result = { caught: true, t: S.t, by: 'rabbit', who: h >= 0 && a >= 0 ? 'both' : h >= 0 ? 'hum' : 'ai', rab: h >= 0 ? h : a, ptsHum: h >= 0 ? pts : 0, ptsAi: a >= 0 ? pts : 0, aiMode: S.aiSt.mode };
+    S.result.pts = S.result.ptsHum;
+    return true;
+  }
+
+  function botStep(S, hunters) {
+    const C = S.C, st = S.botSt, bot = S.bot;
+    const us = C.traps.map(tr => unit(sub(tr.p, bot)));
+    const th = [];
+    // 獵人跟鹿重疊時「遠離方向」算不出來，改用朝場地中央的方向，避免原地亂抖
+    const ctr = [C.W / 2, C.H / 2];
+    for (const p of hunters) { const d = len(sub(bot, p)); if (d < C.R) th.push({ a: d > 8 ? unit(sub(bot, p)) : unit(sub(ctr, bot)), w: 1 - d / C.R, d }); }
+    let dir, speed, pinched = false;
+    if (th.length >= 2) pinched = Math.abs(ang(mul(th[0].a, -1), mul(th[1].a, -1))) >= C.thetaMin * D2R;
+    const wallDist = p => Math.min(p[0], C.W - p[0], p[1], C.H - p[1]);
+    const vB = C.vH * C.vBotMul;
+    if (th.length) {
+      let a = [0, 0]; for (const t of th) a = add(a, mul(t.a, t.w)); a = unit(a);
+      const dmin = Math.min(...th.map(t => t.d));
+      speed = vB * Math.min(1, C.fleeFloor + (1 - C.fleeFloor) * C.speedGain * (1 - dmin / C.R));
+      if (pinched) { dir = a; speed = Math.min(speed, C.pinchMul * C.vH); }
+      else {
+        // 側閃：轉 ±beta，選朝 Trap 分量較小的一邊；前方貼牆的加罰
+        const c = [1, -1].map(s => { const d = rot(a, s * C.beta * D2R); const ahead = add(bot, mul(d, C.sideAhead)); return { s, d, score: Math.max(...us.map(u => dot(d, u))) + (wallDist(ahead) < C.sideWall ? C.sidePen : 0) }; });
+        c.sort((x, y) => x.score - y.score);
+        // 維持上次的邊：未滿 sideHold 秒、或兩邊差距不大（牆的加罰差距除外）就不換
+        st.sideT -= C.dt;
+        let pick = c[0];
+        const keep = st.side && (st.sideT > 0 || Math.abs(c[0].score - c[1].score) < 0.05) && Math.abs(c[0].score - c[1].score) < 1;
+        if (keep) pick = c.find(x => x.s === st.side);
+        if (pick.s !== st.side) st.sideT = C.sideHold;
+        st.side = pick.s; dir = pick.d;
+      }
+    } else {
+      st.wt -= C.dt; if (st.wt <= 0) { st.wd = S.rnd() * 6.283; st.wt = 0.5 + S.rnd(); }
+      dir = [Math.cos(st.wd), Math.sin(st.wd)]; speed = vB * C.wanderMul;
+    }
+    let v = mul(dir, speed);
+    // 貼牆滑行：逃跑方向朝牆的分量改成沿牆方向，速度不被牆吃掉
+    const bm = C.wallD;                                   // 與牆壁推力同範圍
+    for (const [d, n] of [[bot[0], [1, 0]], [C.W - bot[0], [-1, 0]], [bot[1], [0, 1]], [C.H - bot[1], [0, -1]]])
+      if (d < bm && dot(v, n) < 0) { const sp = len(v); v = sub(v, mul(n, dot(v, n))); v = len(v) > 1e-6 ? mul(unit(v), sp) : v; }
+    // 卡在角落（兩面牆都擋住）：沿著其中一面牆衝出去，選離獵人較遠的那個方向
+    const wx = bot[0] < bm ? 1 : C.W - bot[0] < bm ? -1 : 0, wy = bot[1] < bm ? 1 : C.H - bot[1] < bm ? -1 : 0;
+    if (th.length && !pinched && wx && wy && len(v) < 0.3 * speed) {
+      const near = th.reduce((p, q) => (q.d < p.d ? q : p));
+      const cand = [[wx, 0], [0, wy]].sort((e1, e2) => dot(e2, near.a) - dot(e1, near.a));
+      v = mul(cand[0], speed);
+    }
+    for (const tr of C.traps) {
+      const dT = len(sub(bot, tr.p));
+      if (pinched || dT >= C.trapR + C.trapAvoidD) continue;
+      // 沒被夾住時避開柵欄（每個 Trap 都避）：朝柵欄的分量改成繞著柵欄外緣滑（跟貼牆一樣不被擋停），再加向外推力
+      const nT = unit(sub(bot, tr.p));
+      if (dot(v, nT) < 0) { const sp = len(v); v = sub(v, mul(nT, dot(v, nT))); v = len(v) > 1e-6 ? mul(unit(v), sp) : v; }
+      v = add(v, mul(nT, vB * (1 - (dT - C.trapR) / C.trapAvoidD)));
+    }
+    for (const [d, n] of [[bot[0], [1, 0]], [C.W - bot[0], [-1, 0]], [bot[1], [0, 1]], [C.H - bot[1], [0, -1]]])
+      if (d < C.wallD) v = add(v, mul(n, C.kw * C.vH * (1 - d / C.wallD)));
+    v = clampLen(v, vB);
+    // 速度低通：轉向與加減速平滑，不會逐步抖動
+    st.v = clampLen(add(st.v, mul(sub(v, st.v), Math.min(1, C.botResp * C.dt))), vB);
+    st.pinched = pinched; st.threat = th.length > 0;
+    S.botPrev = bot;
+    S.bot = S.inside(add(bot, mul(st.v, C.dt)), C.botMargin);
+  }
+
+  // hdir：人的移動方向（單位向量或 [0,0]）
+  function step(S, hdir) {
+    if (S.phase !== 'play') return;
+    const C = S.C;
+    // 時間到先結束（浮點累加可能多跑一步，避免在 40 s 之後抓到東西得 0 分）
+    if (S.t >= C.T - 1e-9) { S.phase = 'end'; S.result = { caught: false, t: C.T, pts: 0 }; if (C.r2) Object.assign(S.result, { by: null, who: null, ptsHum: 0, ptsAi: 0 }); return; }
+    S.humPrev = S.hum; S.aiPrev = S.ai;
+    S.hum = S.inside(add(S.hum, mul(hdir, C.vH * C.dt)), C.hunterMargin);
+    if (C.aiOn) (C.r3 && !S.blind ? aiStepR3 : C.r2 && !S.blind ? aiStepR2 : aiStep)(S);
+    botStep(S, C.aiOn ? [S.hum, S.ai] : [S.hum]);
+    S.t += C.dt;
+    const ti = C.traps.findIndex(tr => len(sub(S.bot, tr.p)) < C.trapR);
+    if (ti >= 0) {
+      S.phase = 'end'; S.result = { caught: true, t: S.t, pts: Math.ceil(C.T - S.t) * C.traps[ti].mul, trap: ti, hi: ti === C.hi };
+      if (C.r2) Object.assign(S.result, { by: 'deer', who: 'both', ptsHum: S.result.pts, ptsAi: S.result.pts });
+    } else if (C.r2 && r2Touch(S)) {
+      // r2Touch 已寫好 result
+    } else if (S.t >= C.T) {
+      S.phase = 'end'; S.result = { caught: false, t: C.T, pts: 0 };
+      if (C.r2) Object.assign(S.result, { by: null, who: null, ptsHum: 0, ptsAi: 0 });
+    }
+  }
+
+  return { CONFIG, R3DEF, R3LABEL, R2DEF, R2LABEL, r2Say, newRound, step, goTo, stand, mulberry32, vec: { add, sub, mul, len, unit, dot, rot, ang, D2R } };
+})();
+// SIM-END
+
+// ---------- 畫面與輸入 ----------
+(() => {
+  const ATLAS = "data:image/png;base64,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", IDX = {"grass0": 0, "grass1": 1, "grass2": 2, "bush": 3, "tree": 4, "pine": 5, "p00": 6, "p10": 7, "p20": 8, "p01": 9, "p21": 10, "p02": 11, "p12": 12, "p22": 13, "sand": 14, "human": 15, "ai": 16, "deer": 17, "rabbit": 18};
+  const img = new Image(); img.src = ATLAS;
+  document.fonts && document.fonts.load('22px Cubic11');
+  const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+  const C0 = SIM.CONFIG, TS = 48;                 // 16 px 圖塊放大 3 倍
+  const FONT = '"Cubic11","PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif';
+  const COL = { ink: '#3f2631', panel: '#fff8e8', human: '#2c5d87', ai: '#b4630e', warn: '#b23a2a' };
+
+  function fit() {
+    const k = Math.min((innerWidth - 12) / cv.width, (innerHeight - 12) / cv.height);
+    cv.style.width = cv.width * k + 'px'; cv.style.height = cv.height * k + 'px';
+  }
+  addEventListener('resize', fit); fit();
+
+  // ---- 狀態 ----
+  let mode = 'base', blind = false, explain = false, paused = false, started = false, menuOpen = false;
+  let score = 0, aiScore = 0, round = 0, S = null;
+  function nextRound() {
+    round++; paused = false; penOrder = Math.random() < 0.5 ? [0, 1] : [1, 0];
+    S = SIM.newRound({ seed: (Date.now() ^ (round * 2654435761)) >>> 0, blind: mode === 'r1' && blind, config: mode === 'r3' ? { r3: {} } : mode === 'r2' ? { r2: {} } : {} });
+  }
+  let endAt = 0;                   // 回合結束的時刻；之後 0.8 s 內不接受「下一回合」，避免手指習慣性一點就跳過
+  function onAction() {            // 空白鍵／點畫面：回合結束→下一回合；進行中→暫停切換
+    if (!started || menuOpen) return;
+    if (S.phase === 'end') { if (performance.now() - endAt > 800) nextRound(); } else paused = !paused;
+  }
+  const autoPause = () => { if (started && S && S.phase === 'play') paused = true; };
+
+  // ---- 鍵盤 ----
+  const keys = new Set();
+  const DIRK = { ArrowUp: [0, -1], KeyW: [0, -1], ArrowDown: [0, 1], KeyS: [0, 1], ArrowLeft: [-1, 0], KeyA: [-1, 0], ArrowRight: [1, 0], KeyD: [1, 0] };
+  addEventListener('keydown', e => {
+    if (DIRK[e.code] || e.code === 'Space') e.preventDefault();
+    if (!started) return;
+    if (e.code === 'KeyM' && !e.repeat && !e.metaKey && !e.ctrlKey && !e.altKey) { toggleMenu(); return; }
+    if (menuOpen) return;
+    if (DIRK[e.code]) keys.add(e.code);
+    if (e.code === 'Space' && !e.repeat) onAction();
+    if (e.code === 'KeyI' && !e.repeat && !e.metaKey && !e.ctrlKey && !e.altKey) explain = !explain;
+  });
+  addEventListener('keyup', e => keys.delete(e.code));
+  addEventListener('blur', () => { keys.clear(); stick = null; autoPause(); });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) autoPause(); });
+  const portraitMQ = matchMedia('(orientation:portrait) and (pointer:coarse) and (max-width:600px)');
+  portraitMQ.addEventListener && portraitMQ.addEventListener('change', e => { if (e.matches) autoPause(); });
+  document.getElementById('portraitOk').onclick = () => document.body.classList.add('portrait-ok');
+
+  // ---- 觸控搖桿：按住任一處拖動 ----
+  let stick = null;                  // {id, ox, oy, x, y}（畫布座標）
+  // 換算用內容區（不含邊框）；監聽掛在整個頁面，手機左右黑邊也能拖
+  const toCanvas = e => { const r = cv.getBoundingClientRect(); return [(e.clientX - r.left - cv.clientLeft) * cv.width / cv.clientWidth, (e.clientY - r.top - cv.clientTop) * cv.height / cv.clientHeight]; };
+  addEventListener('pointerdown', e => {
+    if (!started || menuOpen || e.target.closest('.card, #rotate')) return;
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    const [x, y] = toCanvas(e);
+    const b = hitBtn(x, y); if (b) { b.act(); return; }
+    if (stick) return;                       // 已有一根手指在控制，其他手指不搶
+    if (S.phase === 'end' || paused) { onAction(); return; }
+    stick = { id: e.pointerId, ox: x, oy: y, x, y };
+  });
+  addEventListener('pointermove', e => { if (stick && e.pointerId === stick.id) [stick.x, stick.y] = toCanvas(e); });
+  const endStick = e => { if (stick && e.pointerId === stick.id) stick = null; };
+  addEventListener('pointerup', endStick); addEventListener('pointercancel', endStick);
+
+  function humanDir() {
+    let x = 0, y = 0;
+    if (stick) { x = stick.x - stick.ox; y = stick.y - stick.oy; if (Math.hypot(x, y) < 12) x = y = 0; }
+    else for (const k of keys) { x += DIRK[k][0]; y += DIRK[k][1]; }
+    const l = Math.hypot(x, y); return l ? [x / l, y / l] : [0, 0];
+  }
+
+  // ---- 選單與按鈕 ----
+  const startOv = document.getElementById('startOv'), menuOv = document.getElementById('menuOv');
+  document.getElementById('startBtn').onclick = () => { startOv.hidden = true; started = true; nextRound(); };
+  function syncMenu() {
+    menuOv.querySelectorAll('[data-mode]').forEach(b => b.classList.toggle('on', b.dataset.mode === mode));
+    menuOv.querySelectorAll('[data-vis]').forEach(b => b.classList.toggle('on', (b.dataset.vis === 'blind') === blind));
+    document.getElementById('visRow').style.opacity = mode === 'r1' ? 1 : .35;
+  }
+  function toggleMenu(force) { menuOpen = force !== undefined ? force : !menuOpen; menuOv.hidden = !menuOpen; keys.clear(); stick = null; syncMenu(); }
+  const resetAll = () => { score = 0; aiScore = 0; round = 0; nextRound(); };   // 切換情境＝重新計分
+  menuOv.querySelectorAll('[data-mode]').forEach(b => b.onclick = () => { mode = b.dataset.mode; syncMenu(); resetAll(); });
+  menuOv.querySelectorAll('[data-vis]').forEach(b => b.onclick = () => { if (mode !== 'r1') return; blind = b.dataset.vis === 'blind'; syncMenu(); resetAll(); });
+  document.getElementById('restartBtn').onclick = () => { resetAll(); toggleMenu(false); };
+  document.getElementById('closeBtn').onclick = () => toggleMenu(false);
+  // 畫在畫布上的按鈕（跟畫布一起縮放）：位於上緣中間，避開四個角落的柵欄
+  const BTNS = [{ label: '說明', x: 568, act: () => { explain = !explain; } },
+                { label: '暫停', x: 638, act: () => onAction() },
+                { label: '選單', x: 708, act: () => toggleMenu() }];
+  const BTN_Y = 10, BTN_W = 64, BTN_H = 44;
+  const hitBtn = (x, y) => BTNS.find(b => x >= b.x && x <= b.x + BTN_W && y >= BTN_Y && y <= BTN_Y + BTN_H);
+
+  // ---- 圖塊 ----
+  function tile(name, x, y, flip) {
+    const sx = IDX[name] * 16;
+    if (flip) { ctx.save(); ctx.translate(Math.round(x) + TS, Math.round(y)); ctx.scale(-1, 1); ctx.drawImage(img, sx, 0, 16, 16, 0, 0, TS, TS); ctx.restore(); }
+    else ctx.drawImage(img, sx, 0, 16, 16, Math.round(x), Math.round(y), TS, TS);
+  }
+  // 背景（草地＋邊界樹）只畫一次
+  const bg = document.createElement('canvas'); bg.width = C0.W; bg.height = C0.H;
+  function buildBg() {
+    const b = bg.getContext('2d'); b.imageSmoothingEnabled = false;
+    const r = SIM.mulberry32(5);
+    const put = (n, x, y) => b.drawImage(img, IDX[n] * 16, 0, 16, 16, x, y, TS, TS);
+    for (let y = 0; y < C0.H; y += TS) for (let x = 0; x < C0.W; x += TS) { const v = r(); put(v < .8 ? 'grass0' : v < .97 ? 'grass1' : 'grass2', x, y); }
+    const trees = ['tree', 'bush', 'pine'];
+    for (let x = -TS; x < C0.W + TS; x += TS) { put(trees[(x / TS + 3 & 7) % 3], x, -30); put(trees[(x / TS + 5 & 7) % 3], x, C0.H - 18); }
+    for (let y = 0; y < C0.H; y += TS) { put(trees[(y / TS & 7) % 3], -30, y); put(trees[(y / TS + 1 & 7) % 3], C0.W - 18, y); }
+  }
+  img.onload = buildBg;
+
+  // R3 兩個柵欄用不同顏色；顏色每回合隨機分配，與倍率無關
+  const PEN_COLS = [{ name: '藍', c: '#1f7aff' }, { name: '紫', c: '#b04ce0' }];
+  let penOrder = [0, 1];
+  const penCache = {};
+  function penImage(col) {                  // 3×3 柵欄畫進離屏畫布，有顏色時用 source-atop 上色
+    const key = col || 'plain';
+    if (penCache[key]) return penCache[key];
+    const pc = document.createElement('canvas'); pc.width = pc.height = 3 * TS;
+    const g = pc.getContext('2d'); g.imageSmoothingEnabled = false;
+    for (let j = 0; j < 3; j++) for (let i = 0; i < 3; i++)
+      g.drawImage(img, IDX[i === 1 && j === 1 ? 'sand' : 'p' + i + j] * 16, 0, 16, 16, i * TS, j * TS, TS, TS);
+    if (col) { g.globalCompositeOperation = 'source-atop'; g.globalAlpha = 0.55; g.fillStyle = col; g.fillRect(0, 0, pc.width, pc.height); }
+    if (img.complete && img.naturalWidth) penCache[key] = pc;
+    return pc;
+  }
+  function drawPen(c, col) {
+    // 柵欄底排中間是開口；下方兩角時上下翻轉，讓開口朝場內
+    const flipV = c[1] > C0.H / 2;
+    ctx.save();
+    if (flipV) { ctx.translate(0, 2 * c[1]); ctx.scale(1, -1); }
+    ctx.drawImage(penImage(col), Math.round(c[0] - 1.5 * TS), Math.round(c[1] - 1.5 * TS));
+    ctx.restore();
+  }
+  function ring(p, color) {                 // 點狀驅趕圈，對齊 3 px 像素格
+    ctx.fillStyle = color; const n = 64;
+    for (let i = 0; i < n; i++) { const a = i / n * 6.283; ctx.fillRect(Math.round((p[0] + Math.cos(a) * C0.R) / 3) * 3, Math.round((p[1] + Math.sin(a) * C0.R) / 3) * 3, 3, 3); }
+  }
+  function tag(s, p, color) {
+    ctx.font = `22px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    const w = ctx.measureText(s).width + 14, x = Math.round(p[0]), y = Math.round(p[1] < 110 ? p[1] + 40 : p[1] - 38);   // 靠近上緣 HUD 時翻到腳下
+    ctx.fillStyle = COL.panel; ctx.fillRect(x - w / 2, y - 13, w, 26);
+    ctx.strokeStyle = COL.ink; ctx.lineWidth = 3; ctx.strokeRect(x - w / 2, y - 13, w, 26);
+    ctx.fillStyle = color; ctx.fillText(s, x, y + 1);
+  }
+  function text(s, x, y, size, color, align = 'left') {
+    ctx.font = `${size}px ${FONT}`; ctx.fillStyle = color; ctx.textAlign = align; ctx.textBaseline = 'middle'; ctx.fillText(s, x, y);
+  }
+  function panel(x, y, w, h, a = 0.82) {
+    ctx.fillStyle = `rgba(255,248,232,${a})`; ctx.fillRect(x, y, w, h);
+    ctx.strokeStyle = COL.ink; ctx.lineWidth = 3; ctx.strokeRect(x + 1.5, y + 1.5, w - 3, h - 3);
+  }
+  function drawHUD() {
+    const left = Math.max(0, Math.ceil(S.C.T - S.t));
+    panel(150, 10, 410, 44);
+    text(`剩 ${left} 秒`, 164, 33, 22, left <= 10 ? COL.warn : COL.ink);
+    if (S.C.r2) { text(`你 ${score}`, 286, 33, 22, COL.human); text(`AI ${aiScore}`, 376, 33, 22, COL.ai); }
+    else text(`分數 ${score}`, 286, 33, 22, COL.ink);
+    text(mode === 'base' ? '基底' : mode === 'r2' ? 'R2' : mode === 'r3' ? (S.C.info === 'H' ? 'R3・你知情' : 'R3') : `R1・${blind ? '看不到' : '看得到'}`, 548, 33, 22, COL.ink, 'right');
+    for (const b of BTNS) { panel(b.x, BTN_Y, BTN_W, BTN_H); text(b.label, b.x + BTN_W / 2, BTN_Y + 23, 22, (b.label === '說明' && explain) ? COL.ai : COL.ink, 'center'); }
+  }
+  function banner(lines) {
+    const w = 500, h = 36 + lines.length * 40, x = (C0.W - w) / 2, y = (C0.H - h) / 2;   // 正中央；柵欄都在角落
+    panel(x, y, w, h, 0.96);
+    lines.forEach((l, i) => text(l[0], C0.W / 2, y + 38 + i * 40, l[1], l[2] || COL.ink, 'center'));
+  }
+  // R3：人知情時在柵欄上標倍率；回合結束時標出被抓進的那個
+  function drawMuls() {
+    S.C.traps.forEach((tr, i) => {
+      const show = S.C.info === 'H' || (S.phase === 'end' && S.result.caught && S.result.trap === i);
+      if (!show) return;
+      const s = `${tr.mul}×`, x = tr.p[0], y = tr.p[1];
+      ctx.font = `33px ${FONT}`; const w = ctx.measureText(s).width + 16;
+      panel(x - w / 2, y - 22, w, 44, 0.95);
+      text(s, x, y + 1, 33, tr.hi ? COL.warn : COL.ink, 'center');
+    });
+  }
+  function drawExplainR3() {
+    const A = S.aiSt, Z = A.r3, T = S.C.traps;
+    // 用位置稱呼柵欄（不用倍率），AI 不知情時才不會像是它知道哪個高分
+    const where = i => PEN_COLS[penOrder[i]].name + '柵欄';   // 用顏色稱呼，不用倍率
+    const tgt = Z.K >= 0 ? `→${where(Z.K)}` : '';
+    const you = Z.hT >= 0 ? `你往${where(Z.hT)}${Z.ins > 0.2 ? ` 堅持${Z.ins.toFixed(1)}s` : ''}` : '你：看不出';
+    panel(190, C0.H - 54, 580, 44);                     // 不蓋到下方兩角的柵欄
+    text(`AI${Z.know ? '知情' : '不知情'}｜${SIM.R3LABEL[A.mode] || A.mode}${tgt}｜${you}`, 480, C0.H - 31, 22, COL.ink, 'center');
+    if (A.target) { const p = A.target; ctx.fillStyle = COL.ai; for (const [dx, dy] of [[-6, -6], [-3, -3], [0, 0], [3, 3], [6, 6], [6, -6], [3, -3], [-3, 3], [-6, 6]]) ctx.fillRect(p[0] + dx - 1.5, p[1] + dy - 1.5, 3, 3); }
+  }
+  function drawExplain() {
+    if (S.C.r3) return drawExplainR3();
+    if (S.C.r2) { panel(190, C0.H - 54, 580, 44); text(SIM.r2Say(S), 480, C0.H - 31, 22, COL.ink, 'center'); return; }
+    const A = S.aiSt;
+    const name = { fill: '補位（站你對側）', lead: '帶路（自己繞後推）', blind: '也看不到你，但他還是在嘗試趕鹿' }[A.mode];
+    const line = S.blind ? `AI${name}`
+      : `AI ${name}｜${A.pushing ? '你在推' : '你沒在推'}｜鹿${S.botSt.pinched ? '被夾住' : '沒被夾住'}`;
+    panel(180, C0.H - 54, 600, 44);                       // 下緣中間，避開角落柵欄
+    text(line, 480, C0.H - 31, 22, COL.ink, 'center');
+    if (!S.blind) { const p = A.target; ctx.fillStyle = COL.ai; for (const [dx, dy] of [[-6, -6], [-3, -3], [0, 0], [3, 3], [6, 6], [6, -6], [3, -3], [-3, 3], [-6, 6]]) ctx.fillRect(p[0] + dx - 1.5, p[1] + dy - 1.5, 3, 3); }
+  }
+  function drawStick() {
+    if (!stick) return;
+    ctx.globalAlpha = .5; ctx.strokeStyle = COL.panel; ctx.lineWidth = 4;
+    ctx.beginPath(); ctx.arc(stick.ox, stick.oy, 56, 0, 6.283); ctx.stroke();
+    const dx = stick.x - stick.ox, dy = stick.y - stick.oy, l = Math.hypot(dx, dy), k = l > 56 ? 56 / l : 1;
+    ctx.fillStyle = COL.panel; ctx.beginPath(); ctx.arc(stick.ox + dx * k, stick.oy + dy * k, 24, 0, 6.283); ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+
+  // ---- 主迴圈：固定時間步，每幀最多補 5 步 ----
+  let acc = 0, last = performance.now(), deerFlip = false, humFlip = false, aiFlip = false;
+  function frame(now) {
+    acc += Math.min(0.1, (now - last) / 1000); last = now;
+    let n = 0;
+    while (acc >= C0.dt && n < 5) {
+      if (started && !paused && !menuOpen && S && S.phase === 'play') {
+        SIM.step(S, humanDir());
+        if (S.phase === 'end') { score += S.result.pts; aiScore += S.result.ptsAi != null ? S.result.ptsAi : S.result.pts; endAt = performance.now(); }
+      }
+      acc -= C0.dt; n++;
+    }
+    if (n === 5) acc = 0;
+    try { render(now / 1000); } finally { requestAnimationFrame(frame); }   // 畫面出錯也不停止迴圈
+  }
+  const bob = (moving, t, ph) => moving ? Math.round(Math.abs(Math.sin(t * 10 + ph)) * -2) * 3 : 0;
+  function render(t) {
+    ctx.imageSmoothingEnabled = false;
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    ctx.drawImage(bg, 0, 0);
+    if (!S) return;
+    S.C.traps.forEach((tr, i) => drawPen(tr.p, S.C.r3 ? PEN_COLS[penOrder[i]].c : null));
+    if (S.C.r3) drawMuls();
+    const V = SIM.vec;
+    const mvB = V.sub(S.bot, S.botPrev); if (Math.abs(mvB[0]) > 0.8) deerFlip = mvB[0] < 0;   // 水平速度夠大才翻面，避免左右閃
+    const mvH = V.sub(S.hum, S.humPrev), mvA = V.sub(S.ai, S.aiPrev);   // 用模擬步的位移，不受螢幕更新率影響
+    if (Math.abs(mvH[0]) > 0.05) humFlip = mvH[0] < 0; if (Math.abs(mvA[0]) > 0.05) aiFlip = mvA[0] < 0;
+    ring(S.hum, 'rgba(44,93,135,.8)');
+    if (!S.blind) ring(S.ai, 'rgba(180,99,14,.85)');
+    const play = S.phase === 'play' && !paused && !menuOpen;
+    // 由上到下排序畫角色，前後遮擋才自然
+    const actors = [{ n: 'deer', p: S.bot, f: deerFlip, m: V.len(mvB) > .05, ph: 0 }, { n: 'human', p: S.hum, f: humFlip, m: V.len(mvH) > .05, ph: 1 }];
+    if (!S.blind) actors.push({ n: 'ai', p: S.ai, f: aiFlip, m: V.len(mvA) > .05, ph: 2 });
+    if (S.rabbits) S.rabbits.forEach(r => { actors.push({ n: 'rabbit', p: r, f: false, m: false, ph: 0 }); });
+    actors.sort((a, b) => a.p[1] - b.p[1]);
+    for (const a of actors) tile(a.n, a.p[0] - TS / 2, a.p[1] - TS / 2 + bob(a.m && play, t, a.ph), a.f);
+    if (S.botSt.threat && S.phase === 'play') {        // 鹿被威脅（有獵人在驅趕圈內）：像素驚嘆號
+      const top = S.bot[1] < 110, x = Math.round(S.bot[0] / 3) * 3 + (top ? 30 : 12), y = Math.round(S.bot[1] / 3) * 3 + (top ? -15 : -48);   // 靠近上緣時改畫在右側，不被 HUD 蓋住
+      ctx.fillStyle = COL.ink; ctx.fillRect(x - 3, y - 3, 12, 24); ctx.fillRect(x - 3, y + 24, 12, 12);
+      ctx.fillStyle = '#ffd23f'; ctx.fillRect(x, y, 6, 18); ctx.fillRect(x, y + 27, 6, 6);
+    }
+    if (S.rabbits) S.rabbits.forEach(r => {       // 抓兔計時圈：停在兔子上 1 秒，頭上的圈逐漸填滿
+      const h = r.hold || {}, prog = Math.max(h.hum || 0, h.ai || 0) / (S.C.r2.dwellT || 1);
+      if (prog <= 0) return;
+      const x = r[0] + 34, y = r[1] - 6, col = (h.hum || 0) >= (h.ai || 0) ? COL.human : COL.ai;
+      ctx.lineWidth = 6; ctx.strokeStyle = COL.ink; ctx.beginPath(); ctx.arc(x, y, 12, 0, 6.283); ctx.stroke();
+      ctx.lineWidth = 4; ctx.strokeStyle = COL.panel; ctx.beginPath(); ctx.arc(x, y, 12, 0, 6.283); ctx.stroke();
+      ctx.strokeStyle = col; ctx.beginPath(); ctx.arc(x, y, 12, -Math.PI / 2, -Math.PI / 2 + 6.283 * Math.min(1, prog)); ctx.stroke();
+    });
+    tag('你', S.hum, COL.human);
+    if (!S.blind) tag('AI', S.ai, COL.ai);
+    drawHUD();
+    // R2 回合開頭 4 秒：規則提示
+    if (S.C.r2 && S.phase === 'play' && S.t < 4) {
+      const msg = '鹿：兩人各得剩餘秒數｜兔：停 1 秒，只給自己 1/2';
+      ctx.font = `22px ${FONT}`; const w = ctx.measureText(msg).width + 28;
+      panel((C0.W - w) / 2, 70, w, 44, 0.8); text(msg, C0.W / 2, 93, 22, COL.ink, 'center');
+    }
+    // R3 回合開頭 2.5 秒：告訴玩家有一個柵欄是 3 倍，以及自己知不知道是哪個
+    if (S.C.r3 && S.phase === 'play' && S.t < 2.5) {
+      const msg = S.C.info === 'H' ? '你知道哪個柵欄是 3 倍（有標示）' : '一個柵欄 3 倍、一個 1 倍，你不知道是哪個';
+      ctx.font = `22px ${FONT}`; const w = ctx.measureText(msg).width + 28;
+      panel((C0.W - w) / 2, 70, w, 44, 0.95); text(msg, C0.W / 2, 93, 22, COL.ink, 'center');
+    }
+    if (explain) drawExplain();
+    drawStick();
+    if (S.phase === 'end') {
+      const r = S.result;
+      const who = S.C.r3 ? { H: '這回合你知道高分', A: '這回合 AI 知道高分', N: '這回合兩邊都不知道' }[S.C.info] : null;
+      const gain = !r.caught ? '' : S.C.r2 ? (r.by === 'deer' ? `一起抓到鹿：你 +${r.ptsHum}、AI +${r.ptsAi}`
+          : r.who === 'hum' ? `你抓到兔子：你 +${r.ptsHum}、AI +0` : r.who === 'ai' ? `AI 抓到兔子：你 +0、AI +${r.ptsAi}` : `一起抓到兔子：你 +${r.ptsHum}、AI +${r.ptsAi}`)
+        : S.C.r3 ? `進了 ${S.C.traps[r.trap].mul} 倍柵欄：+${r.pts} 分` : `+${r.pts} 分（剩 ${r.pts} 秒）`;
+      banner(r.caught ? [[S.C.r2 && r.by === 'rabbit' ? `第 ${round} 回合：抓到兔子` : `第 ${round} 回合：抓到了！`, 33], [gain, 22, S.C.r2 && r.who === 'ai' ? COL.ai : COL.human], ...(who ? [[who, 22]] : []), ['按空白鍵或點畫面開始下一回合', 22]]
+        : [[`第 ${round} 回合：時間到`, 33], ['這回合 0 分', 22, COL.warn], ...(who ? [[who, 22]] : []), ['按空白鍵或點畫面開始下一回合', 22]]);
+    } else if (paused) banner([['暫停', 33], ['按空白鍵或點畫面繼續', 22]]);
+  }
+  window.__game = { get state() { return S; } };   // 測試用
+  requestAnimationFrame(frame);
+})();
+</script>
