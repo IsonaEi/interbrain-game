@@ -4,4 +4,4 @@
 
 線上玩：https://isonaei.github.io/interbrain-game/ （電腦用方向鍵／WASD；手機橫放，按住畫面拖動）
 
-美術素材 Kenney Tiny 系列（CC0，見 `LICENSE-kenney.txt`）；字型 Cubic 11（SIL OFL 1.1，見 `LICENSE-Cubic11.txt`）。
+美術素材 Kenney Tiny 系列（CC0，見 `LICENSE-kenney.txt`）；字型 Cubic 11（免費授權，見 `LICENSE-Cubic11.txt`）。
