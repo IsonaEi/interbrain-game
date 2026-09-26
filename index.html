@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
 <meta charset="utf-8">
 <title>雙人圍獵</title>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -10,7 +12,7 @@ html,body{height:100%;margin:0}
 body{background:var(--bg);color:var(--ink);font-family:var(--font);display:flex;align-items:center;justify-content:center;
   overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 #wrap{position:relative}
-canvas{display:block;box-sizing:content-box;image-rendering:pixelated;border:3px solid var(--ink);border-radius:6px;touch-action:none}
+canvas{display:block;box-sizing:content-box;max-width:calc(100vw - 12px);max-height:calc(100vh - 12px);object-fit:contain;image-rendering:pixelated;border:3px solid var(--ink);border-radius:6px;touch-action:none}
 .card button{font:inherit;font-size:22px;padding:5px 12px;border-radius:6px;border:3px solid var(--ink);
   background:var(--panel);color:var(--ink);cursor:pointer;box-shadow:0 3px 0 var(--ink)}
 .card button:active{transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
@@ -607,10 +609,12 @@ const SIM = (() => {
   const COL = { ink: '#3f2631', panel: '#fff8e8', human: '#2c5d87', ai: '#b4630e', warn: '#b23a2a' };
 
   function fit() {
-    const k = Math.min((innerWidth - 12) / cv.width, (innerHeight - 12) / cv.height);
+    // 用實際可見寬高（innerWidth 在手機上可能被撐寬的版面帶偏）
+    const de = document.documentElement, vw = Math.min(innerWidth, de.clientWidth || innerWidth), vh = Math.min(innerHeight, de.clientHeight || innerHeight);
+    const k = Math.min((vw - 12) / cv.width, (vh - 12) / cv.height);
     cv.style.width = cv.width * k + 'px'; cv.style.height = cv.height * k + 'px';
   }
-  addEventListener('resize', fit); fit();
+  addEventListener('resize', fit); addEventListener('orientationchange', () => setTimeout(fit, 200)); fit();
 
   // ---- 狀態 ----
   let mode = 'r1', blind = false, showRing = true, explain = false, paused = false, started = false, menuOpen = false;
