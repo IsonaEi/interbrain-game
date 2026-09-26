@@ -732,11 +732,18 @@ const SIM = (() => {
   document.getElementById('restartBtn').onclick = () => { resetAll(); toggleMenu(false); };
   document.getElementById('closeBtn').onclick = () => toggleMenu(false);
   syncFS();
-  // 畫在畫布上的按鈕（跟畫布一起縮放）：位於上緣中間，避開四個角落的柵欄
-  const BTNS = [{ label: '說明', x: 568, act: () => { explain = !explain; } },
-                { label: '暫停', x: 638, act: () => onAction() },
-                { label: '選單', x: 708, act: () => toggleMenu() }];
-  const BTN_Y = 10, BTN_W = 64, BTN_H = 44;
+  // 遊戲內字級：Cubic 11 在 11 的倍數才清楚；主要文字 33（×3），次要標籤 22，標題 44
+  const FS = 33, FS_S = 22, FS_L = 44;
+  // 版面邊界：四角柵欄佔 x 38–182／778–922、y 38–182／458–602。上緣條（y < 38）與下緣條（y > 602）可橫跨全寬；
+  // 比 38 高的東西（按鈕、提示）只能放在上方兩個柵欄之間（x 182–778）
+  const PEN_TOP = 38, PEN_BOT = 602, MID_L = 182, MID_R = 778;
+  // 畫在畫布上的按鈕（跟畫布一起縮放）：上方兩個柵欄之間的右側
+  const BTN_Y = 2, BTN_W = 84, BTN_H = 52, BTN_GAP = 6;
+  const BTNS = [{ label: '說明', act: () => { explain = !explain; } },
+                { label: '暫停', act: () => onAction() },
+                { label: '選單', act: () => toggleMenu() }];
+  BTNS.forEach((b, i) => { b.x = MID_R - (3 - i) * BTN_W - (2 - i) * BTN_GAP; });
+  const HUD_R = BTNS[0].x - 8;                     // 資訊條右緣
   const hitBtn = (x, y) => BTNS.find(b => x >= b.x && x <= b.x + BTN_W && y >= BTN_Y && y <= BTN_Y + BTN_H);
 
   // ---- 圖塊 ----
@@ -789,10 +796,10 @@ const SIM = (() => {
   const onCanvas = p => [Math.min(C0.W - AS / 2, Math.max(AS / 2, p[0])), Math.min(C0.H - AS / 2, Math.max(AS / 2, p[1]))];
   function tag(s, p, color) {
     p = onCanvas(p);
-    ctx.font = `22px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    const w = ctx.measureText(s).width + 14, x = Math.round(p[0]), y = Math.round(p[1] < 110 ? p[1] + 48 : p[1] - 46);   // 靠近上緣 HUD 時翻到腳下
-    ctx.fillStyle = COL.panel; ctx.fillRect(x - w / 2, y - 13, w, 26);
-    ctx.strokeStyle = COL.ink; ctx.lineWidth = 3; ctx.strokeRect(x - w / 2, y - 13, w, 26);
+    ctx.font = `${FS}px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    const w = ctx.measureText(s).width + 16, x = Math.round(p[0]), y = Math.round(p[1] < 130 ? p[1] + 54 : p[1] - 54);   // 靠近上緣 HUD 時翻到腳下
+    ctx.fillStyle = COL.panel; ctx.fillRect(x - w / 2, y - 19, w, 38);
+    ctx.strokeStyle = COL.ink; ctx.lineWidth = 3; ctx.strokeRect(x - w / 2, y - 19, w, 38);
     ctx.fillStyle = color; ctx.fillText(s, x, y + 1);
   }
   function text(s, x, y, size, color, align = 'left') {
@@ -804,21 +811,37 @@ const SIM = (() => {
   }
   function drawHUD() {
     const left = Math.max(0, Math.ceil(S.C.T - S.t));
-    panel(150, 10, 410, 44);
-    text(`剩 ${left} 秒`, 164, 33, 22, left <= 10 ? COL.warn : COL.ink);
-    ctx.font = `22px ${FONT}`;
-    let end;
-    if (S.C.r2) { text(`你 ${score}`, 270, 33, 22, COL.human); const x = 270 + ctx.measureText(`你 ${score}`).width + 16; text(`AI ${aiScore}`, x, 33, 22, COL.ai); end = x + ctx.measureText(`AI ${aiScore}`).width; }
-    else { text(`分數 ${score}`, 270, 33, 22, COL.ink); end = 270 + ctx.measureText(`分數 ${score}`).width; }
-    // 子規則標籤靠右；放不下時省略「看不到」（畫面上沒有 AI 已表示看不到）
+    // 資訊條在上緣（y 0–38，柵欄上方），可以延伸到左上柵欄上面
+    const Y = PEN_TOP / 2 + 1, tw = (s, z) => { ctx.font = `${z}px ${FONT}`; return ctx.measureText(s).width; };
+    panel(8, 0, HUD_R - 8, PEN_TOP);
+    let x = 20;
+    const put = (s, col) => { text(s, x, Y, FS, col); x += tw(s, FS) + 20; };
+    put(`剩 ${left} 秒`, left <= 10 ? COL.warn : COL.ink);
+    if (S.C.r2) { put(`你 ${score}`, COL.human); put(`AI ${aiScore}`, COL.ai); } else put(`分數 ${score}`, COL.ink);
+    // 子規則標籤（小字）靠右；放不下時省略「看不到」（畫面上沒有 AI 已表示看不到）
     const lab = mode.toUpperCase() + (S.C.r3 && S.C.info === 'H' ? '・你知情' : ''), full = lab + (S.blind ? '・看不到' : '');
-    text(548 - ctx.measureText(full).width >= end + 12 ? full : lab, 548, 33, 22, COL.ink, 'right');
-    for (const b of BTNS) { panel(b.x, BTN_Y, BTN_W, BTN_H); text(b.label, b.x + BTN_W / 2, BTN_Y + 23, 22, (b.label === '說明' && explain) ? COL.ai : COL.ink, 'center'); }
+    text(HUD_R - 12 - tw(full, FS_S) >= x - 8 ? full : lab, HUD_R - 12, Y, FS_S, COL.ink, 'right');
+    for (const b of BTNS) { panel(b.x, BTN_Y, BTN_W, BTN_H); text(b.label, b.x + BTN_W / 2, BTN_Y + BTN_H / 2 + 1, FS, (b.label === '說明' && explain) ? COL.ai : COL.ink, 'center'); }
   }
+  // 正中央的橫幅（柵欄都在角落）；lines＝[[文字, 字級, 顏色], …]，寬度依最長一行
   function banner(lines) {
-    const w = 500, h = 36 + lines.length * 40, x = (C0.W - w) / 2, y = (C0.H - h) / 2;   // 正中央；柵欄都在角落
+    const lh = l => l[1] + 16;
+    let w = 0; for (const l of lines) { ctx.font = `${l[1]}px ${FONT}`; w = Math.max(w, ctx.measureText(l[0]).width); }
+    w = Math.max(420, w + 60); const h = 28 + lines.reduce((a, l) => a + lh(l), 0), x = (C0.W - w) / 2, y = (C0.H - h) / 2;
     panel(x, y, w, h, 0.96);
-    lines.forEach((l, i) => text(l[0], C0.W / 2, y + 38 + i * 40, l[1], l[2] || COL.ink, 'center'));
+    let cy = y + 14; for (const l of lines) { text(l[0], C0.W / 2, cy + lh(l) / 2, l[1], l[2] || COL.ink, 'center'); cy += lh(l); }
+  }
+  // 上方兩個柵欄之間的提示（回合開頭的規則說明）；每行一個字串
+  function hint(lines, a) {
+    let w = 0; ctx.font = `${FS}px ${FONT}`; for (const l of lines) w = Math.max(w, ctx.measureText(l).width);
+    w += 28; const h = 12 + lines.length * 44, y0 = BTN_Y + BTN_H + 8;
+    panel((C0.W - w) / 2, y0, w, h, a);
+    lines.forEach((l, i) => text(l, C0.W / 2, y0 + 6 + 22 + i * 44, FS, COL.ink, 'center'));
+  }
+  // 說明列：下緣（柵欄下方）一整條，只放一行
+  function explainBar(line) {
+    panel(8, PEN_BOT, C0.W - 16, C0.H - PEN_BOT);
+    text(line, C0.W / 2, (PEN_BOT + C0.H) / 2 + 1, FS, COL.ink, 'center');
   }
   // R3：人知情時在柵欄上標倍率；回合結束時標出被抓進的那個
   function drawMuls() {
@@ -826,9 +849,9 @@ const SIM = (() => {
       const show = S.C.info === 'H' || (S.phase === 'end' && S.result.caught && S.result.trap === i);
       if (!show) return;
       const s = `${tr.mul}×`, x = tr.p[0], y = tr.p[1];
-      ctx.font = `33px ${FONT}`; const w = ctx.measureText(s).width + 16;
-      panel(x - w / 2, y - 22, w, 44, 0.95);
-      text(s, x, y + 1, 33, tr.hi ? COL.warn : COL.ink, 'center');
+      ctx.font = `${FS_L}px ${FONT}`; const w = ctx.measureText(s).width + 20;
+      panel(x - w / 2, y - 28, w, 56, 0.95);
+      text(s, x, y + 1, FS_L, tr.hi ? COL.warn : COL.ink, 'center');
     });
   }
   const where = i => PEN_COLS[penOrder[i]].name + '柵欄';   // R3 用顏色稱呼柵欄，不用倍率（AI 不知情時才不會像是它知道哪個高分）
@@ -836,24 +859,22 @@ const SIM = (() => {
     const A = S.aiSt, Z = A.r3, T = S.C.traps;
     const tgt = Z.K >= 0 ? `→${where(Z.K)}` : '';
     const you = Z.hT >= 0 ? `你往${where(Z.hT)}${Z.ins > 0.2 ? ` 堅持${Z.ins.toFixed(1)}s` : ''}` : '你：看不出';
-    panel(190, C0.H - 54, 580, 44);                     // 不蓋到下方兩角的柵欄
-    text(`AI${Z.know ? '知情' : '不知情'}｜${SIM.R3LABEL[A.mode] || A.mode}${tgt}｜${you}`, 480, C0.H - 31, 22, COL.ink, 'center');
+    explainBar(`AI${Z.know ? '知情' : '不知情'}｜${SIM.R3LABEL[A.mode] || A.mode}${tgt}｜${you}`);
     if (A.target) { const p = A.target; ctx.fillStyle = COL.ai; for (const [dx, dy] of [[-6, -6], [-3, -3], [0, 0], [3, 3], [6, 6], [6, -6], [3, -3], [-3, 3], [-6, 6]]) ctx.fillRect(p[0] + dx - 1.5, p[1] + dy - 1.5, 3, 3); }
   }
   function drawExplain() {
     if (S.blind && (S.C.r3 || S.C.r2)) {
       const line = S.C.r3 ? `AI${S.C.r3 && S.C.info === 'A' ? '知情' : '不知情'}，也看不到你｜趕鹿→${where(S.aiTrapI)}`
         : S.aiSt.mode === 'rab' ? 'AI也看不到你｜時間不夠，改抓兔' : 'AI也看不到你，但他還是在嘗試趕鹿（繞開兔子）';
-      panel(190, C0.H - 54, 580, 44); text(line, 480, C0.H - 31, 22, COL.ink, 'center'); return;
+      explainBar(line); return;
     }
     if (S.C.r3) return drawExplainR3();
-    if (S.C.r2) { panel(190, C0.H - 54, 580, 44); text(SIM.r2Say(S), 480, C0.H - 31, 22, COL.ink, 'center'); return; }
+    if (S.C.r2) { explainBar(SIM.r2Say(S)); return; }
     const A = S.aiSt;
     const name = { fill: '補位（站你對側）', lead: '帶路（自己繞後推）', blind: '也看不到你，但他還是在嘗試趕鹿' }[A.mode];
     const line = S.blind ? `AI${name}`
       : `AI ${name}｜${A.pushing ? '你在推' : '你沒在推'}｜鹿${S.botSt.pinched ? '被夾住' : '沒被夾住'}`;
-    panel(180, C0.H - 54, 600, 44);                       // 下緣中間，避開角落柵欄
-    text(line, 480, C0.H - 31, 22, COL.ink, 'center');
+    explainBar(line);
     if (!S.blind) { const p = A.target; ctx.fillStyle = COL.ai; for (const [dx, dy] of [[-6, -6], [-3, -3], [0, 0], [3, 3], [6, 6], [6, -6], [3, -3], [-3, 3], [-6, 6]]) ctx.fillRect(p[0] + dx - 1.5, p[1] + dy - 1.5, 3, 3); }
   }
   function drawStick() {
@@ -918,15 +939,11 @@ const SIM = (() => {
     drawHUD();
     // R2 回合開頭 4 秒：規則提示
     if (S.C.r2 && S.phase === 'play' && S.t < 4) {
-      const msg = '鹿：兩人各得剩餘秒數｜兔：停 1 秒，只給自己 1/2';
-      ctx.font = `22px ${FONT}`; const w = ctx.measureText(msg).width + 28;
-      panel((C0.W - w) / 2, 70, w, 44, 0.8); text(msg, C0.W / 2, 93, 22, COL.ink, 'center');
+      hint(['鹿：兩人各得剩餘秒數', '兔：停 1 秒，只給自己 1/2'], 0.8);
     }
     // R3 回合開頭 2.5 秒：告訴玩家有一個柵欄是 3 倍，以及自己知不知道是哪個
     if (S.C.r3 && S.phase === 'play' && S.t < 2.5) {
-      const msg = S.C.info === 'H' ? '你知道哪個柵欄是 3 倍（有標示）' : '一個柵欄 3 倍、一個 1 倍，你不知道是哪個';
-      ctx.font = `22px ${FONT}`; const w = ctx.measureText(msg).width + 28;
-      panel((C0.W - w) / 2, 70, w, 44, 0.95); text(msg, C0.W / 2, 93, 22, COL.ink, 'center');
+      hint(S.C.info === 'H' ? ['你知道哪個柵欄是 3 倍（有標示）'] : ['一個柵欄 3 倍、一個 1 倍', '你不知道是哪個'], 0.95);
     }
     if (explain) drawExplain();
     drawStick();
@@ -936,9 +953,9 @@ const SIM = (() => {
       const gain = !r.caught ? '' : S.C.r2 ? (r.by === 'deer' ? `一起抓到鹿：你 +${r.ptsHum}、AI +${r.ptsAi}`
           : r.who === 'hum' ? `你抓到兔子：你 +${r.ptsHum}、AI +0` : r.who === 'ai' ? `AI 抓到兔子：你 +0、AI +${r.ptsAi}` : `一起抓到兔子：你 +${r.ptsHum}、AI +${r.ptsAi}`)
         : S.C.r3 ? `進了 ${S.C.traps[r.trap].mul} 倍柵欄：+${r.pts} 分` : `+${r.pts} 分（剩 ${r.pts} 秒）`;
-      banner(r.caught ? [[S.C.r2 && r.by === 'rabbit' ? `第 ${round} 回合：抓到兔子` : `第 ${round} 回合：抓到了！`, 33], [gain, 22, S.C.r2 && r.who === 'ai' ? COL.ai : COL.human], ...(who ? [[who, 22]] : []), ['按空白鍵或點畫面開始下一回合', 22]]
-        : [[`第 ${round} 回合：時間到`, 33], ['這回合 0 分', 22, COL.warn], ...(who ? [[who, 22]] : []), ['按空白鍵或點畫面開始下一回合', 22]]);
-    } else if (paused) banner([['暫停', 33], ['按空白鍵或點畫面繼續', 22]]);
+      banner(r.caught ? [[S.C.r2 && r.by === 'rabbit' ? `第 ${round} 回合：抓到兔子` : `第 ${round} 回合：抓到了！`, FS_L], [gain, FS, S.C.r2 && r.who === 'ai' ? COL.ai : COL.human], ...(who ? [[who, FS]] : []), ['按空白鍵或點畫面開始下一回合', FS]]
+        : [[`第 ${round} 回合：時間到`, FS_L], ['這回合 0 分', FS, COL.warn], ...(who ? [[who, FS]] : []), ['按空白鍵或點畫面開始下一回合', FS]]);
+    } else if (paused) banner([['暫停', FS_L], ['按空白鍵或點畫面繼續', FS]]);
   }
   window.__game = { get state() { return S; } };   // 測試用
   requestAnimationFrame(frame);
